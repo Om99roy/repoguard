@@ -32,21 +32,25 @@ User
 → Verification  
 → Pull Request
 
+```markdown
 ## Demo Scenario
 
-The demonstration repository contains an intentional defect in `calculate_total()`.
+The demonstration uses a controlled repair scenario based on
+`calculate_total()`.
 
-The function returns the untaxed subtotal while the test expects the tax-inclusive total.
+During the demonstration, the repository was temporarily placed in a
+known-broken state where `calculate_total()` returned the untaxed
+subtotal. The test expected the tax-inclusive result.
 
 Expected:
 
 `100 * 1.10 = 110`
 
-Observed before repair:
+Observed in the broken state:
 
 `100`
 
-Proposed repair:
+RepoGuard diagnosed the defect and proposed the minimal repair:
 
 ```python
 return round(subtotal * (1 + tax_rate), 2)
